@@ -2,6 +2,8 @@ package com.ozancanguz.googlemapsdemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -26,8 +28,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.map_types_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+  when(item.itemId){
+      R.id.normalmap -> {
+          map.mapType=GoogleMap.MAP_TYPE_NORMAL
+      }R.id.hybrid_map -> {
+          map.mapType=GoogleMap.MAP_TYPE_HYBRID
+      }R.id.satellite_map -> {
+          map.mapType=GoogleMap.MAP_TYPE_SATELLITE
+      }R.id.terrain_map -> {
+          map.mapType=GoogleMap.MAP_TYPE_TERRAIN
+      }
+  }
+
+        return true
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
