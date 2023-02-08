@@ -36,14 +36,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
         map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         // 15 f how close the view
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,20f))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,10f))
 
         map.uiSettings.apply {
             // zoom buttons enabled
             isZoomControlsEnabled=true
-
-            //
-
         }
+
+        //
+     //   map.setPadding(0,0,300,0)
     }
 }
