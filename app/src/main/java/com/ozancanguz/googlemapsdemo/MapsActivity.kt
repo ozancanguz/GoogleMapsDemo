@@ -14,11 +14,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.ozancanguz.googlemapsdemo.databinding.ActivityMapsBinding
+import com.ozancanguz.googlemapsdemo.misc.TypeAndStyle
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+
+    // init type and style class
+    private val typeAndStyle by lazy { TypeAndStyle() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,17 +45,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-  when(item.itemId){
-      R.id.normalmap -> {
-          map.mapType=GoogleMap.MAP_TYPE_NORMAL
-      }R.id.hybrid_map -> {
-          map.mapType=GoogleMap.MAP_TYPE_HYBRID
-      }R.id.satellite_map -> {
-          map.mapType=GoogleMap.MAP_TYPE_SATELLITE
-      }R.id.terrain_map -> {
-          map.mapType=GoogleMap.MAP_TYPE_TERRAIN
-      }
-  }
+        // set map type
+         typeAndStyle.setMapType(item,map)
 
         return true
     }
@@ -74,25 +69,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      //   map.setPadding(0,0,300,0)
 
 
+        // type function
+      typeAndStyle.setMapStyle(map,this)
 
-        // set map style
-        setMapStyle(map)
+
     }
 
 
-    private fun setMapStyle(googleMap: GoogleMap){
-        try {
-            val success=googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(
-                this,
-                R.raw.style
-            ))
-
-            if(!success){
-                Log.d("Maps","Map style did not work")
-            }
-        }catch (e:Exception){
-            Log.d("Maps",e.toString())
-        }
-    }
 
 }
