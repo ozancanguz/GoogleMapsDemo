@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.ozancanguz.googlemapsdemo.databinding.ActivityMapsBinding
+import com.ozancanguz.googlemapsdemo.misc.CameraAndViewPort
 import com.ozancanguz.googlemapsdemo.misc.TypeAndStyle
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -23,6 +24,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     // init type and style class
     private val typeAndStyle by lazy { TypeAndStyle() }
+
+    // init camera and viewport class
+    private val cameraAndViewPort by lazy { CameraAndViewPort() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +63,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         // 15 f how close the view
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,10f))
+
+        // camera new position
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraAndViewPort.Sdyney))
 
         map.uiSettings.apply {
             // zoom buttons enabled
